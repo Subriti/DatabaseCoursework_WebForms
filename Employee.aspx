@@ -9,7 +9,8 @@
             
         -->
 
-    <div>
+    <div style="margin-top: 80px;">
+
         <h3>Employee Details</h3>
         <asp:Button Text="Add Employee" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
         <div>

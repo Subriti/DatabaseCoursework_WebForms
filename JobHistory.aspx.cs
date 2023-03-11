@@ -1,10 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -28,7 +24,7 @@ namespace WebApplication1
             OracleConnection con = new OracleConnection(constr);
             con.Open();
             cmd.Connection = con;
-            cmd.CommandText = @"SELECT  HISTORY_ID, TO_CHAR(START_DATE, 'DD-Mon-YY') AS START_DATE, TO_CHAR(END_DATE, 'DD-Mon-YY') AS END_DATE, EMPLOYEE_ID, DEPARTMENT_ID, ROLE_ID FROM Job_History";
+            cmd.CommandText = @"SELECT  HISTORY_ID, TO_CHAR(START_DATE, 'DD-Mon-YY') AS START_DATE, TO_CHAR(END_DATE, 'DD-Mon-YY') AS END_DATE, J.EMPLOYEE_ID, E.EMPLOYEE_NAME, J.DEPARTMENT_ID, D.DEPARTMENT_NAME, J.ROLE_ID, R.ROLE_NAME FROM Job_History J JOIN EMPLOYEE E ON E.EMPLOYEE_ID=J.EMPLOYEE_ID JOIN DEPARTMENT D ON D.DEPARTMENT_ID=J.DEPARTMENT_ID JOIN ROLES R ON R.ROLE_ID=J.ROLE_ID";
             cmd.CommandType = CommandType.Text;
 
             DataTable dt = new DataTable("job_history");
@@ -126,8 +122,8 @@ namespace WebApplication1
             txtstartdate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd(); // (row.Cells[2].Controls[0] as TextBox).Text;
             txtenddate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
             txtEmp.Text = this.jobTable.Rows[e.NewEditIndex].Cells[4].Text;
-            txtDep.Text = this.jobTable.Rows[e.NewEditIndex].Cells[5].Text;
-            txtRole.Text = this.jobTable.Rows[e.NewEditIndex].Cells[6].Text;
+            txtDep.Text = this.jobTable.Rows[e.NewEditIndex].Cells[6].Text;
+            txtRole.Text = this.jobTable.Rows[e.NewEditIndex].Cells[8].Text;
 
             btnSave.Text = "Update";
 

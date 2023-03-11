@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Address" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Address.aspx.cs" Inherits="WebApplication1.Address"  %>
+﻿<%@ Page Title="Address" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Address.aspx.cs" Inherits="WebApplication1.Address" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -8,7 +8,8 @@
             min-width: 30%;
         }
     </style>
-    <div>
+    <div style="margin-top: 80px;">
+
         <h3>Address Details</h3>
         <asp:Button Text="Add Address" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
         <div>

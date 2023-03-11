@@ -2,13 +2,14 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-      <style>
+    <style>
         .mydatagrid {
             width: 40%;
             min-width: 30%;
         }
     </style>
-    <div>
+    <div style="margin-top: 80px;">
+
         <h3>Department Details</h3>
         <asp:Button Text="Add Department" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
         <div>

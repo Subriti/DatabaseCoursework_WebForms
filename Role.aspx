@@ -1,14 +1,15 @@
-﻿<%@ Page Title="Roles" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Role.aspx.cs" Inherits="WebApplication1.Role"  %>
+﻿<%@ Page Title="Roles" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Role.aspx.cs" Inherits="WebApplication1.Role" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-     <style>
+    <style>
         .mydatagrid {
             width: 40%;
             min-width: 20%;
         }
     </style>
-    <div>
+    <div style="margin-top: 80px;">
+
         <h3>Role Details</h3>
         <asp:Button Text="Add Roles" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
         <div>

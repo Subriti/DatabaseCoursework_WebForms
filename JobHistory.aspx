@@ -4,11 +4,10 @@
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <style>
         .mydatagrid {
-            width: 90%;
+            width: 105%;
         }
     </style>
-    <div>
-
+    <div style="margin-top: 80px;">
         <h3>Job History Details</h3>
         <asp:Button Text="Add Job History" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
         <div>
