@@ -9,7 +9,7 @@
     </style>
     <div style="margin-top: 80px;">
 
-        <h3>Voting Records Details</h3>
+        <h3>Voting Record Details</h3>
         <br />
         <label>Select Employee: </label>
         <asp:DropDownList runat="server" DataTextField="EMPLOYEE_NAME" DataValueField="EMPLOYEE_ID" DataSourceID="SqlDataSource1" ID="empName" AutoPostBack="True"></asp:DropDownList>

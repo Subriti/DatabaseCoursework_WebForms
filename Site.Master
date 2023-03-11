@@ -46,9 +46,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/"><b>✅E-Voting System</b></a>
+                    <a class="navbar-brand" runat="server" href="~/"><b>📈Admin-Analytics📉</b></a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse" style="float:right; margin-right:80px;">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                          <li><a runat="server" href="~/Employee">Employee</a></li>
@@ -56,7 +56,7 @@
                          <li><a runat="server" href="~/Role">Role</a></li>
                          <li><a runat="server" href="~/Address">Address</a></li>
                          <li><a runat="server" href="~/JobHistory">Job History</a></li>
-                        <li><a runat="server" href="~/JobHistoryMapping">Employee Job History Mapping</a></li>
+                        <li><a runat="server" href="~/JobHistoryMapping">Employee Job History</a></li>
                         <li><a runat="server" href="~/VotingRecords">Voting Records</a></li>
                         <li><a runat="server" href="~/EmployeeOfTheMonth">Employee of the Month🥇</a></li>
                     </ul>

@@ -1,11 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -74,6 +69,7 @@ namespace WebApplication1
                 empTable.EditIndex = -1;
 
             }
+            txtID.Text = "";
             txtname.Text = "";
             txtdob.Text = "";
             txtcontact.Text = "";
@@ -84,8 +80,15 @@ namespace WebApplication1
 
         protected void OnRowCancelingEdit(object sender, EventArgs e)
         {
-            this.BindGrid();
+            txtID.Text = "";
+            txtname.Text = "";
+            txtdob.Text = "";
+            txtcontact.Text = "";
+            btnSave.Text = "Save";
+
+
             empTable.EditIndex = -1;
+            this.BindGrid();
         }
 
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -123,14 +126,27 @@ namespace WebApplication1
             txtcontact.Text = this.empTable.Rows[e.NewEditIndex].Cells[4].Text;
             btnSave.Text = "Update";
 
+            empTable.EditIndex = -1;
+            this.BindGrid();
+
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
         }
 
-    protected void modal_Click(object sender, EventArgs e)
+        protected void modal_Click(object sender, EventArgs e)
         {
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
+
+            txtID.Text = "";
+            txtname.Text = "";
+            txtdob.Text = "";
+            txtcontact.Text = "";
+            btnSave.Text = "Save";
+
+
+            empTable.EditIndex = -1;
+            this.BindGrid();
         }
     }
 }

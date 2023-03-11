@@ -1,10 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -70,6 +66,7 @@ namespace WebApplication1
                 btnSave.Text = "Save";
                 roleTable.EditIndex = -1;
             }
+            txtID.Text = "";
             txtname.Text = "";
             this.BindGrid();
         }
@@ -77,8 +74,13 @@ namespace WebApplication1
 
         protected void OnRowCancelingEdit(object sender, EventArgs e)
         {
-            this.BindGrid();
+            txtID.Text = "";
+            txtname.Text = "";
+            btnSave.Text = "Save";
+
+
             roleTable.EditIndex = -1;
+            this.BindGrid();
         }
 
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -114,6 +116,9 @@ namespace WebApplication1
             txtname.Text = this.roleTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd(); // (row.Cells[2].Controls[0] as TextBox).Text;
             btnSave.Text = "Update";
 
+            roleTable.EditIndex = -1;
+            this.BindGrid();
+
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
         }
@@ -122,6 +127,14 @@ namespace WebApplication1
         {
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
+
+            txtID.Text = "";
+            txtname.Text = "";
+            btnSave.Text = "Save";
+
+
+            roleTable.EditIndex = -1;
+            this.BindGrid();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace WebApplication1
             string department = txtDep.Text.ToString();
             string role = txtRole.Text.ToString();
 
-            if(endDate=="null" || endDate == "")
+            if (endDate == "null" || endDate == "")
             {
                 endDate = null;
             }
@@ -66,7 +66,7 @@ namespace WebApplication1
             {
                 //get ID for the Update
                 string ID = txtID.Text.ToString();
-                OracleCommand cmd = new OracleCommand("update job_history set START_DATE = '" + startDate + "',END_DATE = '" + endDate + "',EMPLOYEE_ID = '" + employee + "',DEPARTMENT_ID = '" + department + "',ROLE_ID = '" + role +"' where HISTORY_ID = " + ID);
+                OracleCommand cmd = new OracleCommand("update job_history set START_DATE = '" + startDate + "',END_DATE = '" + endDate + "',EMPLOYEE_ID = '" + employee + "',DEPARTMENT_ID = '" + department + "',ROLE_ID = '" + role + "' where HISTORY_ID = " + ID);
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -74,10 +74,14 @@ namespace WebApplication1
 
                 btnSave.Text = "Save";
                 jobTable.EditIndex = -1;
-
             }
+
+            txtID.Text = "";
             txtstartdate.Text = "";
             txtenddate.Text = "";
+            txtEmp.SelectedIndex = 0;
+            txtDep.SelectedIndex = 0;
+            txtRole.SelectedIndex = 0;
 
             this.BindGrid();
         }
@@ -85,8 +89,17 @@ namespace WebApplication1
 
         protected void OnRowCancelingEdit(object sender, EventArgs e)
         {
-            this.BindGrid();
+            txtID.Text = "";
+            txtstartdate.Text = "";
+            txtenddate.Text = "";
+            txtEmp.SelectedIndex = 0;
+            txtDep.SelectedIndex = 0;
+            txtRole.SelectedIndex = 0;
+
+            btnSave.Text = "Save";
+
             jobTable.EditIndex = -1;
+            this.BindGrid();
         }
 
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -119,13 +132,23 @@ namespace WebApplication1
         {
             // get id for data update
             txtID.Text = this.jobTable.Rows[e.NewEditIndex].Cells[1].Text;
-            txtstartdate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd(); // (row.Cells[2].Controls[0] as TextBox).Text;
-            txtenddate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+            txtstartdate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd();
+            if (this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd() == "&nbsp;")
+            {
+                txtenddate.Text = "";
+            }
+            else
+            {
+                txtenddate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+            }
             txtEmp.Text = this.jobTable.Rows[e.NewEditIndex].Cells[4].Text;
             txtDep.Text = this.jobTable.Rows[e.NewEditIndex].Cells[6].Text;
             txtRole.Text = this.jobTable.Rows[e.NewEditIndex].Cells[8].Text;
 
             btnSave.Text = "Update";
+
+            jobTable.EditIndex = -1;
+            this.BindGrid();
 
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
@@ -135,6 +158,18 @@ namespace WebApplication1
         {
             string script = "$('#addModal').modal('show');";
             ClientScript.RegisterStartupScript(this.GetType(), "Popup", script, true);
+
+            txtID.Text = "";
+            txtstartdate.Text = "";
+            txtenddate.Text = "";
+            txtEmp.SelectedIndex = 0;
+            txtDep.SelectedIndex = 0;
+            txtRole.SelectedIndex = 0;
+
+            btnSave.Text = "Save";
+
+            jobTable.EditIndex = -1;
+            this.BindGrid();
         }
     }
 }

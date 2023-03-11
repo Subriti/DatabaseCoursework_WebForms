@@ -12,7 +12,7 @@
         <h3>Employee of the month</h3>
         <br />
         <label>Select Month: </label>
-        
+
         <asp:DropDownList runat="server" ID="votingMonth" AutoPostBack="True">
             <asp:ListItem Selected="True">January</asp:ListItem>
             <asp:ListItem>February</asp:ListItem>
@@ -28,8 +28,8 @@
             <asp:ListItem>December</asp:ListItem>
         </asp:DropDownList>
 
-        
-        <label style="margin-left:40px;">Select Year: </label>
+
+        <label style="margin-left: 40px;">Select Year: </label>
         <asp:DropDownList ID="votingYear" runat="server" AutoPostBack="True">
             <asp:ListItem Selected="True">2023</asp:ListItem>
             <asp:ListItem>2022</asp:ListItem>
@@ -39,7 +39,7 @@
         </asp:DropDownList>
         <div>
             <br />
-            <asp:GridView ID="jobTable" runat="server" CssClass="mydatagrid" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" DataKeyNames="EMPLOYEE_ID" EmptyDataText="No records were found." AutoGenerateColumns="False" DataSourceID="SqlDataSource1" >
+            <asp:GridView ID="jobTable" runat="server" CssClass="mydatagrid" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" DataKeyNames="EMPLOYEE_ID" EmptyDataText="No records were found." AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                 <Columns>
                     <asp:BoundField DataField="Number of Votes" HeaderText="Number of Votes" SortExpression="Number of Votes" />
                     <asp:BoundField DataField="EMPLOYEE_ID" HeaderText="EMPLOYEE_ID" ReadOnly="True" SortExpression="EMPLOYEE_ID" />
@@ -47,9 +47,9 @@
                     <asp:BoundField DataField="DATE_OF_BIRTH" HeaderText="DATE_OF_BIRTH" SortExpression="DATE_OF_BIRTH" DataFormatString="{0:dd-MMM-yy}" />
                     <asp:BoundField DataField="CONTACT_NUMBER" HeaderText="CONTACT_NUMBER" SortExpression="CONTACT_NUMBER" />
                 </Columns>
-<HeaderStyle CssClass="header"></HeaderStyle>
+                <HeaderStyle CssClass="header"></HeaderStyle>
 
-<RowStyle CssClass="rows"></RowStyle>
+                <RowStyle CssClass="rows"></RowStyle>
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="select * from (select count(v.voting_id) AS &quot;Number of Votes&quot;, e.employee_id, e.employee_name, e.date_of_birth, e.contact_number from Voting_Details v join standing_candidate s on s.voting_id = v.voting_id join employee e on e.employee_id=s.candidate_id where s.voting_month=:votingMonth and s.voting_year=:votingYear group by v.voting_id, e.employee_id, e.employee_name, e.date_of_birth, e.contact_number order by count(v.voting_id)desc)
 WHERE ROWNUM &lt;= 3">

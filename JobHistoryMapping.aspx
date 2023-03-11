@@ -7,11 +7,11 @@
             width: 105%;
         }
     </style>
-    <div style="margin-top:80px;">
+    <div style="margin-top: 80px;">
         <h3>Job History Mapping</h3>
         <br />
 
-         <label>Select Employee: </label>
+        <label>Select Employee: </label>
         <asp:DropDownList runat="server" DataTextField="EMPLOYEE_NAME" DataValueField="EMPLOYEE_ID" DataSourceID="SqlDataSource1" ID="empName" AutoPostBack="True"></asp:DropDownList>
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT EMPLOYEE_ID, EMPLOYEE_NAME FROM EMPLOYEE"></asp:SqlDataSource>
         <div>
@@ -19,7 +19,7 @@
             <asp:GridView ID="jobTable" runat="server" CssClass="mydatagrid" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" DataKeyNames="HISTORY_ID,EMPLOYEE_ID" EmptyDataText="No records were found." AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
                 <Columns>
                     <asp:BoundField DataField="HISTORY_ID" HeaderText="HISTORY_ID" ReadOnly="True" SortExpression="HISTORY_ID" />
-                    <asp:BoundField DataField="START_DATE" HeaderText="START_DATE" SortExpression="START_DATE" DataFormatString="{0:dd-MMM-yy}"/>
+                    <asp:BoundField DataField="START_DATE" HeaderText="START_DATE" SortExpression="START_DATE" DataFormatString="{0:dd-MMM-yy}" />
                     <asp:BoundField DataField="END_DATE" HeaderText="END_DATE" SortExpression="END_DATE" DataFormatString="{0:dd-MMM-yy}" />
                     <asp:BoundField DataField="Job Time Period" HeaderText="TIME PERIOD" SortExpression="Job Time Period" />
                     <asp:BoundField DataField="EMPLOYEE_ID" HeaderText="EMPLOYEE_ID" SortExpression="EMPLOYEE_ID" ReadOnly="True" />
