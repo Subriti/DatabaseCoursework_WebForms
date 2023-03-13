@@ -7,7 +7,7 @@
             width: 105%;
         }
     </style>
-    <div style="margin-top: 80px;">
+    <div>
 
         <h3>Voting Record Details</h3>
         <br />

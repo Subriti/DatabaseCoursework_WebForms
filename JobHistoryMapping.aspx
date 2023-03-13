@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Job History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="JobHistoryMapping.aspx.cs" Inherits="WebApplication1.JobHistoryMapping" %>
+﻿<%@ Page Title="History Mapping" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="JobHistoryMapping.aspx.cs" Inherits="WebApplication1.JobHistoryMapping" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -7,8 +7,8 @@
             width: 105%;
         }
     </style>
-    <div style="margin-top: 80px;">
-        <h3>Job History Mapping</h3>
+    <div>
+        <h3>Employee's Previous Job Histories</h3>
         <br />
 
         <label>Select Employee: </label>

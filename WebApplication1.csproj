@@ -165,6 +165,16 @@
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="EmployeeOfTheMonth.aspx" />
+    <Content Include="icons\award.png" />
+    <Content Include="icons\corporate.png" />
+    <Content Include="icons\documents.png" />
+    <Content Include="icons\employee-of-the-month.png" />
+    <Content Include="icons\employee.png" />
+    <Content Include="icons\history.png" />
+    <Content Include="icons\location.png" />
+    <Content Include="icons\manager.png" />
+    <Content Include="icons\office.png" />
+    <Content Include="icons\team.png" />
     <Content Include="VotingRecords.aspx" />
     <Content Include="JobHistoryMapping.aspx" />
     <Content Include="JobHistory.aspx" />

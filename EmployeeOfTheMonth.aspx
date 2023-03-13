@@ -7,7 +7,7 @@
             width: 90%;
         }
     </style>
-    <div style="margin-top: 80px;">
+    <div>
 
         <h3>Employee of the month</h3>
         <br />

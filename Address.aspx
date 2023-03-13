@@ -8,7 +8,7 @@
             min-width: 30%;
         }
     </style>
-    <div style="margin-top: 80px;">
+    <div>
 
         <h3>Address Details</h3>
         <asp:Button Text="Add Address" ID="modal" CssClass="btn btn-primary" OnClick="modal_Click" runat="server" />
@@ -29,8 +29,8 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <label>Name</label>
-                        <asp:TextBox ID="txtname" CssClass="form-control" placeholder="Name" runat="server" />
+                        <label>Address Name</label>
+                        <asp:TextBox ID="txtname" CssClass="form-control" placeholder="Address" runat="server" />
                         <br />
 
                         <div class="modal-footer">

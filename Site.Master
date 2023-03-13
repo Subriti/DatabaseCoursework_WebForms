@@ -46,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/"><b>📈Admin-Analytics📉</b></a>
+                    <a class="navbar-brand" runat="server" href="~/"><b>📈Analytics📉</b></a>
                 </div>
                 <div class="navbar-collapse collapse" style="float:right; margin-right:80px;">
                     <ul class="nav navbar-nav">
@@ -55,10 +55,10 @@
                          <li><a runat="server" href="~/Department">Department</a></li>
                          <li><a runat="server" href="~/Role">Role</a></li>
                          <li><a runat="server" href="~/Address">Address</a></li>
-                         <li><a runat="server" href="~/JobHistory">Job History</a></li>
-                        <li><a runat="server" href="~/JobHistoryMapping">Employee Job History</a></li>
+                         <li><a runat="server" href="~/JobHistory">Job</a></li>
+                        <li><a runat="server" href="~/JobHistoryMapping">Job History</a></li>
                         <li><a runat="server" href="~/VotingRecords">Voting Records</a></li>
-                        <li><a runat="server" href="~/EmployeeOfTheMonth">Employee of the Month🥇</a></li>
+                        <li><a runat="server" href="~/EmployeeOfTheMonth">Employee of the Month</a></li>
                     </ul>
                 </div>
             </div>
