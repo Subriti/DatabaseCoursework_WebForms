@@ -39,6 +39,12 @@ namespace WebApplication1
             {
                 addressCount.Text = drvSql["ADDRESS COUNT"].ToString();
             }
+
+            DataView dvSql5= (DataView)SqlDataSource7.Select(DataSourceSelectArguments.Empty);
+            foreach (DataRowView drvSql in dvSql5)
+            {
+                jobCount.Text = drvSql["JOB COUNT"].ToString();
+            }
         }
     }
 }

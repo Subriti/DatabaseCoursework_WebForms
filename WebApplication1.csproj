@@ -171,6 +171,7 @@
     <Content Include="icons\employee-of-the-month.png" />
     <Content Include="icons\employee.png" />
     <Content Include="icons\history.png" />
+    <Content Include="icons\job-offer.png" />
     <Content Include="icons\location.png" />
     <Content Include="icons\manager.png" />
     <Content Include="icons\office.png" />

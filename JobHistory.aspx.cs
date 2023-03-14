@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -24,7 +25,7 @@ namespace WebApplication1
             OracleConnection con = new OracleConnection(constr);
             con.Open();
             cmd.Connection = con;
-            cmd.CommandText = @"SELECT  HISTORY_ID, TO_CHAR(START_DATE, 'DD-Mon-YY') AS START_DATE, TO_CHAR(END_DATE, 'DD-Mon-YY') AS END_DATE, J.EMPLOYEE_ID, E.EMPLOYEE_NAME, J.DEPARTMENT_ID, D.DEPARTMENT_NAME, J.ROLE_ID, R.ROLE_NAME FROM Job_History J JOIN EMPLOYEE E ON E.EMPLOYEE_ID=J.EMPLOYEE_ID JOIN DEPARTMENT D ON D.DEPARTMENT_ID=J.DEPARTMENT_ID JOIN ROLES R ON R.ROLE_ID=J.ROLE_ID where J.END_DATE IS NULL";
+            cmd.CommandText = @"SELECT  HISTORY_ID, TO_CHAR(START_DATE, 'DD-Mon-YY') AS START_DATE, J.EMPLOYEE_ID, E.EMPLOYEE_NAME, J.DEPARTMENT_ID, D.DEPARTMENT_NAME, J.ROLE_ID, R.ROLE_NAME FROM Job_History J JOIN EMPLOYEE E ON E.EMPLOYEE_ID=J.EMPLOYEE_ID JOIN DEPARTMENT D ON D.DEPARTMENT_ID=J.DEPARTMENT_ID JOIN ROLES R ON R.ROLE_ID=J.ROLE_ID WHERE J.END_DATE IS NULL  ORDER BY HISTORY_ID";
             cmd.CommandType = CommandType.Text;
 
             DataTable dt = new DataTable("job_history");
@@ -51,6 +52,39 @@ namespace WebApplication1
             {
                 endDate = null;
             }
+            else
+            {
+                if (DateTime.TryParseExact(endDate, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    // Parsing was successful, and the date is in the correct format
+                    DateTime inputDate = DateTime.ParseExact(endDate, "d/M/yyyy", CultureInfo.InvariantCulture);
+                    endDate = inputDate.ToString("dd-MMM-yy");
+                }
+                if (DateTime.TryParseExact(endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    // Parsing was successful, and the date is in the correct format
+                    DateTime inputDate = DateTime.ParseExact(endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    endDate = inputDate.ToString("dd-MMM-yy");
+                }
+            }
+
+            if (DateTime.TryParseExact(startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            {
+                // Parsing was successful, and the date is in the correct format
+                DateTime inputDate = DateTime.ParseExact(startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                startDate = inputDate.ToString("dd-MMM-yy");
+            }
+            else
+            {
+                if (DateTime.TryParseExact(startDate, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    // Parsing was successful, and the date is in the correct format
+                    DateTime inputDate = DateTime.ParseExact(startDate, "d/M/yyyy", CultureInfo.InvariantCulture);
+                    startDate = inputDate.ToString("dd-MMM-yy");
+                }
+            }
+
+            
 
             OracleConnection con = new OracleConnection(constr);
 
@@ -132,18 +166,30 @@ namespace WebApplication1
         {
             // get id for data update
             txtID.Text = this.jobTable.Rows[e.NewEditIndex].Cells[1].Text;
-            txtstartdate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd();
+           
+            String date = this.jobTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd();
+            DateTime inputDate = DateTime.ParseExact(date, "dd-MMM-yy", CultureInfo.InvariantCulture);
+            txtstartdate.Text = inputDate.ToString("dd/MM/yyyy");
+
+            /*
             if (this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd() == "&nbsp;")
             {
                 txtenddate.Text = "";
             }
-            else
+            else      //bc end_date is hidden; as employee is still doing his job
             {
-                txtenddate.Text = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+               String dates = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+                DateTime inputDates = DateTime.ParseExact(dates, "dd-MMM-yy", CultureInfo.InvariantCulture);
+                txtenddate.Text = inputDates.ToString("dd/MM/yyyy");
             }
+            
             txtEmp.Text = this.jobTable.Rows[e.NewEditIndex].Cells[4].Text;
             txtDep.Text = this.jobTable.Rows[e.NewEditIndex].Cells[6].Text;
             txtRole.Text = this.jobTable.Rows[e.NewEditIndex].Cells[8].Text;
+            */
+            txtEmp.Text = this.jobTable.Rows[e.NewEditIndex].Cells[3].Text;
+            txtDep.Text = this.jobTable.Rows[e.NewEditIndex].Cells[5].Text;
+            txtRole.Text = this.jobTable.Rows[e.NewEditIndex].Cells[7].Text;
 
             btnSave.Text = "Update";
 
@@ -170,6 +216,20 @@ namespace WebApplication1
 
             jobTable.EditIndex = -1;
             this.BindGrid();
+        }
+
+        protected void dateValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string dateString = args.Value;
+            DateTime date;
+            if (DateTime.TryParseExact(dateString, "dd-MMM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
         }
     }
 }

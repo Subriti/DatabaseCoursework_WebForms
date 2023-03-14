@@ -3,7 +3,7 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="jumbotron" style="margin-bottom: -50px; margin-top:-3px;">
+    <div class="jumbotron" style="margin-bottom: -50px; margin-top: -3px;">
         <%--  <h2>Admin Analytics Panel</h2>
 
         <p class="lead" style="font-family: cursive">
@@ -11,7 +11,7 @@
         </p>--%>
 
         <center>
-            <div class="ag-courses_item" style="background-color: mediumseagreen; padding: 10px; padding-left: 20px; padding-right: 20px; margin-left: 15px; width: fit-content; margin-top:-30px">
+            <div class="ag-courses_item" style="background-color: mediumseagreen; padding: 10px; padding-left: 20px; padding-right: 20px; margin-left: 15px; width: fit-content; margin-top: -30px">
                 <h2>
                     <b>
                         <asp:Label ID="Label1" runat="server"></asp:Label></b></h2>
@@ -100,6 +100,25 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                 </div>
 
                 <div class="ag-courses_item">
+                    <a href="JobHistory" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Job Details 
+                              <img src="icons/job-offer.png" alt="records" height="40" width="40">
+                        </div>
+
+                        <div class="ag-courses-item_date-box">
+                            Count:
+         <span class="ag-courses-item_date">
+             <asp:Label ID="jobCount" runat="server"></asp:Label>
+             <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="Select Count(history_id) As &quot;Job Count&quot; from job_history where end_date is null"></asp:SqlDataSource>
+         </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="ag-courses_item">
                     <a href="Address" class="ag-courses-item_link">
                         <div class="ag-courses-item_bg"></div>
 
@@ -108,7 +127,7 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                             <img src="icons/location.png" alt="records" height="40" width="40">
                         </div>
 
-                        <div class="ag-courses-item_date-box">
+                        <div class="ag-courses-item_date-box" style="margin-bottom: -10px">
                             Count:
           <span class="ag-courses-item_date">
               <asp:Label ID="addressCount" runat="server"></asp:Label>
@@ -118,10 +137,10 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                     </a>
                 </div>
 
-                <div class="ag-courses_item" style="margin-left:160px;">
-                    <a href="JobHistory" class="ag-courses-item_link">
+                <div class="ag-courses_item">
+                    <a href="JobHistoryMapping" class="ag-courses-item_link">
                         <div class="ag-courses-item_bg"></div>
-                        <div class="ag-courses-item_title" style="margin-bottom:-6px">
+                        <div class="ag-courses-item_title" style="margin-bottom: -1px">
                             View Job History 
                             <img src="icons/history.png" alt="records" height="40" width="40">
                         </div>
@@ -132,7 +151,7 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                     <a href="VotingRecords" class="ag-courses-item_link">
                         <div class="ag-courses-item_bg"></div>
 
-                        <div class="ag-courses-item_title" style="margin-bottom:-6px">
+                        <div class="ag-courses-item_title" style="margin-bottom: -1px">
                             View Voting Details
                             <img src="icons/documents.png" alt="records" height="40" width="40">
                         </div>
@@ -143,7 +162,7 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                     <a href="EmployeeOfTheMonth" class="ag-courses-item_link">
                         <div class="ag-courses-item_bg">
                         </div>
-                        <div class="ag-courses-item_title" style="margin-bottom:-6px">
+                        <div class="ag-courses-item_title" style="margin-bottom: -1px">
                             View Best Employees 
                             <img src="icons/employee-of-the-month.png" alt="records" height="40" width="40">
                         </div>
@@ -151,8 +170,8 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
                 </div>
 
 
-                <div style="margin-left: 330px; margin-bottom:-80px; border: dashed; border-width: 5px; width: fit-content; background: -webkit-linear-gradient(top, #67d8f2, #9f01ea);">
-                    <p style="text-align: center;"><b>Employee Count in each Departments</b></p>
+                <div style="margin-left: 330px; margin-bottom: -80px; border: dashed; border-width: 5px; width: fit-content; background: -webkit-linear-gradient(top, #67d8f2, #9f01ea);">
+                    <p style="text-align: center;"><b>Employee Count in each Department</b></p>
                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT d.Department_Name, Count(j.Employee_id) from department d join job_history j on j.department_id=d.department_id where j.end_date is null group by d.department_name"></asp:SqlDataSource>
 
                     <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource3" Width="500" Height="300">
@@ -184,7 +203,7 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
 
 
         body {
-            width:100%;
+            width: 100%;
             overflow-x: hidden; /*
             background-color: #000;*/
         }
@@ -329,5 +348,4 @@ WHERE ROWNUM = 1"></asp:SqlDataSource>
             }
         }
     </style>
-
 </asp:Content>

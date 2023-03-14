@@ -1,6 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Globalization;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -44,6 +46,22 @@ namespace WebApplication1
             string name = txtname.Text.ToString();
             string dob = txtdob.Text.ToString();
             string contact = txtcontact.Text.ToString();
+
+            if (DateTime.TryParseExact(dob, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            {
+                // Parsing was successful, and the date is in the correct format
+                DateTime inputDate = DateTime.ParseExact(dob, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                dob = inputDate.ToString("dd-MMM-yy");
+            }
+            else
+            {
+                if (DateTime.TryParseExact(dob, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    // Parsing was successful, and the date is in the correct format
+                    DateTime inputDate = DateTime.ParseExact(dob, "d/M/yyyy", CultureInfo.InvariantCulture);
+                    dob = inputDate.ToString("dd-MMM-yy");
+                }
+            }
 
             OracleConnection con = new OracleConnection(constr);
 
@@ -122,7 +140,13 @@ namespace WebApplication1
             // get id for data update
             txtID.Text = this.empTable.Rows[e.NewEditIndex].Cells[1].Text;
             txtname.Text = this.empTable.Rows[e.NewEditIndex].Cells[2].Text.ToString().TrimStart().TrimEnd(); // (row.Cells[2].Controls[0] as TextBox).Text;
-            txtdob.Text = this.empTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+
+            String date = this.empTable.Rows[e.NewEditIndex].Cells[3].Text.ToString().TrimStart().TrimEnd();
+            DateTime inputDate = DateTime.ParseExact(date, "dd-MMM-yy", CultureInfo.InvariantCulture);
+
+            txtdob.Text = inputDate.ToString("dd/MM/yyyy");
+
+
             txtcontact.Text = this.empTable.Rows[e.NewEditIndex].Cells[4].Text;
             btnSave.Text = "Update";
 
@@ -147,6 +171,20 @@ namespace WebApplication1
 
             empTable.EditIndex = -1;
             this.BindGrid();
+        }
+
+        protected void dateValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string dateString = args.Value;
+            DateTime date;
+            if (DateTime.TryParseExact(dateString, "dd-MMM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
         }
     }
 }
