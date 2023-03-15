@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Globalization;
 using System.Runtime.InteropServices.ComTypes;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -93,6 +94,8 @@ namespace WebApplication1
             txtcontact.Text = "";
 
             this.BindGrid();
+
+
         }
 
 
@@ -114,12 +117,23 @@ namespace WebApplication1
             int ID = Convert.ToInt32(empTable.DataKeys[e.RowIndex].Values[0]);
             using (OracleConnection con = new OracleConnection(constr))
             {
-                using (OracleCommand cmd = new OracleCommand("DELETE FROM Employee WHERE EMPLOYEE_ID =" + ID))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                    using (OracleCommand cmd = new OracleCommand("DELETE FROM Employee WHERE EMPLOYEE_ID =" + ID))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    errorLabel.Text = "The employee could not be deleted because it holds few child records.";
+
+                    // show the modal using jQuery
+                    string script = "$('#errorModal').modal('show');";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", script, true);
                 }
             }
             this.BindGrid();
